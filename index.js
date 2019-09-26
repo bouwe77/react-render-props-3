@@ -36,8 +36,11 @@ function Toggle({ render, onToggle }) {
 
   function doToggle() {
     setOn(!on);
-    if (onToggle) onToggle(!on);
   }
+
+  useEffect(() => {
+    if (onToggle) onToggle(on);
+  }, [on]);
 
   return <>{render(doToggle)}</>;
 }
