@@ -40,7 +40,7 @@ function Toggle({ render, onToggle }) {
 
   useEffect(() => {
     if (onToggle) onToggle(on);
-  }, [on]);
+  }, [on, onToggle]);
 
   return <>{render(doToggle)}</>;
 }
