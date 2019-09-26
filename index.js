@@ -13,7 +13,7 @@ function App() {
     console.log(`Let's save subscribe: ${subscribe}`);
   }
 
-  function renderCheckbox(toggle, on) {
+  function renderCheckbox(toggle) {
     return (
       <>
         <input type="checkbox" onChange={toggle} />
@@ -34,14 +34,15 @@ function App() {
 function Toggle({ render, onToggle }) {
   const [on, setOn] = useState(false);
 
-  useEffect(
-    () => {
-      if (onToggle) onToggle(on);
-    },
-    [on]
-  );
+  function doToggle() {
+    setOn(!on);
+  }
 
-  return <>{render(() => setOn(on => !on), on)}</>;
+  useEffect(() => {
+    if (onToggle) onToggle(on);
+  }, [on]);
+
+  return <>{render(doToggle)}</>;
 }
 
 const rootElement = document.getElementById("root");
